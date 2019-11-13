@@ -6,4 +6,13 @@ public class floor : MonoBehaviour
     [Range(0.1f, 50f)]
     [Tooltip("移動速度")]
     public float speed = 0.1f;
+
+
+    public Transform Ground;
+
+
+    private void Update()
+    {
+        Ground.Translate(-speed, 0, 0);
+    }
 }
