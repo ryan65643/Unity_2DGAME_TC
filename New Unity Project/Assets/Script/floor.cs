@@ -9,6 +9,14 @@ public class floor : MonoBehaviour
 
 
     public Transform Ground;
+   
+    /// <summary>
+    /// 地板移動
+    /// </summary>
+    private void Move()
+    {
+        
+    }
 
 
     private void Update()
