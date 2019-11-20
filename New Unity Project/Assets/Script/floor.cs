@@ -8,19 +8,19 @@ public class floor : MonoBehaviour
     public float speed = 0.1f;
 
 
-    public Transform Ground;
-   
+    public Transform Ground;s
     /// <summary>
     /// 地板移動
     /// </summary>
     private void Move()
     {
-        
+        //Time.deltaTime 一個影格的時間
+        Ground.Translate(-speed*Time.deltaTime, 0, 0);
     }
 
-
+ 
     private void Update()
     {
-        Ground.Translate(-speed, 0, 0);
+        Move();
     }
 }
