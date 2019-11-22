@@ -8,7 +8,7 @@ public class floor : MonoBehaviour
     public float speed = 0.1f;
 
 
-    public Transform Ground;s
+    public Transform Ground;
     /// <summary>
     /// 地板移動
     /// </summary>
