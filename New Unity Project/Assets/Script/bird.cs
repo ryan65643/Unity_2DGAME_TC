@@ -12,9 +12,13 @@ public class bird : MonoBehaviour
     [Header("旋轉角度")]
     [Range(0,360)]
     public float R=360;
-    public GameObject goGM, goS ,W,V,Z;
-
+    public GameObject goGM, goS  ;
+    public GameManager gm;
     public Rigidbody2D go2D;
+    public AudioSource aud;
+    public AudioClip SJ;
+    public AudioClip SH;
+    public AudioClip SD;
 
     //碰撞開始事件:物件碰撞開始時執行一次(紀錄物件碰撞資訊)
    // private void OnCollisionEnter2D(Collision2D collision)
@@ -26,7 +30,17 @@ public class bird : MonoBehaviour
         //觸發開始事件:物件觸發開始時執行一次(紀錄物件碰撞資訊)-針對IsTrigger
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Death();
+        if (collision.gameObject.name== "04_水管"|| collision.gameObject.name == "04_水管 (1)")
+        {
+            
+            Death();    
+        }
+        if (collision.gameObject.name == "通過")
+        {
+            gm.Mux();
+            aud.PlayOneShot(SH);
+        }
+        
     }
     /// <summary>
     /// 小雞跳躍
@@ -35,10 +49,6 @@ public class bird : MonoBehaviour
     {
         if (dead)
         {
-            W.SetActive(true);
-            V.SetActive(true);
-            Z.SetActive(true);
-
             return;
         }
 
@@ -49,6 +59,7 @@ public class bird : MonoBehaviour
             go2D.Sleep();
             go2D.gravityScale = 1;
             go2D.AddForce(new Vector2(0, hight));
+            aud.PlayOneShot(SJ);
         }
         go2D.SetRotation(R* go2D.velocity.y);
     }
@@ -59,6 +70,9 @@ public class bird : MonoBehaviour
     private void Death()
     {
         dead = true;
+        gm.End();
+        floor.speed = 0;
+        aud.PlayOneShot(SD);
     }
 
     /// <summary>

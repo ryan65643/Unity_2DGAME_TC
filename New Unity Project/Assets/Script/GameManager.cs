@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     [Range(0, 9999)]
     [Tooltip("最佳遊戲分數")]
     public int BestPoint = 0;
+    [Header("結束畫面")]
+    public GameObject goF;
 
     //GameObject 可以存在場景上的物件和專案內的預置物
     public GameObject Pipe;
@@ -19,9 +21,9 @@ public class GameManager : MonoBehaviour
     ///遊戲加分 
     /// </summary>
     /// <param name="ADD"></param>
-    private void Mux(int ADD=1)
+    public void Mux(int ADD=1)
     {
-
+     
     }
 
     /// <summary>
@@ -35,10 +37,12 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 遊戲結束
     /// </summary>
-    private void End()
+    public void End()
     {
-
+        goF.SetActive(true);
+        CancelInvoke("SpawnPipe"); //取消調用("方法名稱")
     }
+
 
 
     /// <summary>
