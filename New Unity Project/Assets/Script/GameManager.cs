@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +17,8 @@ public class GameManager : MonoBehaviour
 
     //GameObject 可以存在場景上的物件和專案內的預置物
     public GameObject Pipe;
-
+    public Text TS;
+    public Text TH;
 
     /// <summary>
     ///遊戲加分 
@@ -23,7 +26,9 @@ public class GameManager : MonoBehaviour
     /// <param name="ADD"></param>
     public void Mux(int ADD=1)
     {
-     
+        Point = Point + ADD;
+        TS.text = Point.ToString();
+        BestPointS();
     }
 
     /// <summary>
@@ -31,7 +36,12 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void BestPointS()
     {
-
+        if (Point> BestPoint)
+        {
+            
+            PlayerPrefs.SetInt("最佳分數",Point);
+        }
+        
     }
 
     /// <summary>
@@ -39,6 +49,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void End()
     {
+      
         goF.SetActive(true);
         CancelInvoke("SpawnPipe"); //取消調用("方法名稱")
     }
@@ -59,6 +70,23 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 重新開始
+    /// </summary>
+    public void Replay()
+    {
+        SceneManager.LoadScene("遊戲場景");
+    }
+
+
+    /// <summary>
+    /// 離開遊戲
+    /// </summary>
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
     private void Start()
     {
 
@@ -66,6 +94,8 @@ public class GameManager : MonoBehaviour
         //Invoke("SpawnPipe", 1.5f);
         //重複延遲調用(方法名稱+延遲時間+間隔時間)
         InvokeRepeating("SpawnPipe",0,2f);
-       
+        BestPoint = PlayerPrefs.GetInt("最佳分數");
+        TH.text = BestPoint.ToString();
+        
     }
 }

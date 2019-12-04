@@ -21,21 +21,38 @@ public class bird : MonoBehaviour
     public AudioClip SD;
 
     //碰撞開始事件:物件碰撞開始時執行一次(紀錄物件碰撞資訊)
-   // private void OnCollisionEnter2D(Collision2D collision)
+    // private void OnCollisionEnter2D(Collision2D collision)
     //{
     //    print(collision.gameObject.name);
-     //   Death();
+    //   Death();
     //}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (dead)
+        {
+            return;
+        }
+        if (collision.gameObject.name == "地板" )
+        {
+
+            Death();
+        }
+    }
 
         //觸發開始事件:物件觸發開始時執行一次(紀錄物件碰撞資訊)-針對IsTrigger
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (dead)
+        {
+            return;
+        }
         if (collision.gameObject.name== "04_水管"|| collision.gameObject.name == "04_水管 (1)")
         {
             
             Death();    
         }
-        if (collision.gameObject.name == "通過")
+        if (collision.gameObject.name == "通過" && !dead)
         {
             gm.Mux();
             aud.PlayOneShot(SH);
@@ -88,8 +105,8 @@ public class bird : MonoBehaviour
     //開始:開始時,執行一次
     private void Start()
     {
-        //輸出("訊息");
-        print("Hello World");
+        //設定螢幕解析度(寬,高,是否全螢幕)
+        Screen.SetResolution(450, 800, false);
 
     }
 

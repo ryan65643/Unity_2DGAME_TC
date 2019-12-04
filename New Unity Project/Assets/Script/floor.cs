@@ -10,8 +10,16 @@ public class floor : MonoBehaviour
 
     public static float speed = 3f;
 
-
+    
     public Transform Ground;
+
+    private void Start()
+    {
+
+        speed = 3f;
+
+    }
+
     /// <summary>
     /// 地板移動
     /// </summary>
